@@ -8,16 +8,13 @@ class Estudiante {
   String direccion;
   String telefono;
 
-  // Constructor
   Estudiante(this.cedula, this.nombre, this.apellido, this.fechaNac,
       this.direccion, this.telefono);
 
-  // Método para cambiar la dirección
   void cambiarDireccion(String nuevaDireccion) {
     direccion = nuevaDireccion;
   }
 
-  // Método para mostrar la información del estudiante
   void mostrarUsuario() {
     print('Cédula: $cedula');
     print('Nombre: $nombre $apellido');
@@ -27,4 +24,8 @@ class Estudiante {
     print('Notas: $notas');
     print('Promedio: $promedio');
   }
+}
+
+bool validarCedula(String cedula) {
+  return cedula.isNotEmpty && cedula.contains(RegExp(r'^[0-9]+$'));
 }

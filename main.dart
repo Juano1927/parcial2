@@ -31,8 +31,12 @@ void main() {
 void registrarEstudiante(List<Estudiante> estudiantes) {
   stdout.write('\nIngrese la cédula del estudiante: ');
   String cedula = stdin.readLineSync()!;
-  // Validar formato de cédula
-  // Aquí podrías implementar tu lógica para validar el formato de la cédula
+
+  // Validar cédula
+  if (!validarCedula(cedula)) {
+    print('La cédula debe contener solo números. Intente de nuevo.');
+    return;
+  }
 
   stdout.write('Ingrese el nombre del estudiante: ');
   String nombre = stdin.readLineSync()!;
@@ -40,35 +44,10 @@ void registrarEstudiante(List<Estudiante> estudiantes) {
   String apellido = stdin.readLineSync()!;
   stdout.write('Ingrese la fecha de nacimiento (AAAA-MM-DD): ');
   String fechaNac = stdin.readLineSync()!;
-  // Validar formato de fecha de nacimiento
-  // Aquí podrías implementar tu lógica para validar el formato de la fecha de nacimiento
+  // ...
 
-  stdout.write('Ingrese la dirección del estudiante: ');
-  String direccion = stdin.readLineSync()!;
-  // Validar formato de dirección
-  // Aquí podrías implementar tu lógica para validar el formato de la dirección
-
-  stdout.write('Ingrese el teléfono del estudiante: ');
-  String telefono = stdin.readLineSync()!;
-
-  Estudiante nuevoEstudiante =
-      Estudiante(cedula, nombre, apellido, fechaNac, direccion, telefono);
-
-  // Ingresar notas
-  for (int i = 0; i < 5; i++) {
-    stdout.write('Ingrese la nota ${i + 1}: ');
-    double nota = double.parse(stdin.readLineSync()!);
-    // Validar rango de notas
-    // Aquí podrías implementar tu lógica para validar el rango de notas
-    nuevoEstudiante.notas.add(nota);
-  }
-
-  // Calcular promedio
-  double promedio = nuevoEstudiante.notas.reduce((a, b) => a + b) /
-      nuevoEstudiante.notas.length;
-  nuevoEstudiante.promedio = promedio;
-
-  // Agregar estudiante a la lista
+  Estudiante nuevoEstudiante = Estudiante(
+      cedula, nombre, apellido, fechaNac, 'Sin dirección', 'Sin teléfono');
   estudiantes.add(nuevoEstudiante);
 
   print('Estudiante registrado exitosamente.');
@@ -103,8 +82,6 @@ void verModificarEstudiante(List<Estudiante> estudiantes) {
   if (opcionDireccion.toLowerCase() == 's') {
     stdout.write('Ingrese la nueva dirección: ');
     String nuevaDireccion = stdin.readLineSync()!;
-    // Validar formato de dirección
-    // Aquí podrías implementar tu lógica para validar el formato de la dirección
     estudianteEncontrado.cambiarDireccion(nuevaDireccion);
     print('Dirección modificada exitosamente.');
   }
